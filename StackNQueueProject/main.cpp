@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    string exp = "a+b*c-(d/e+f)*g";
+    string exp = "b-d/(m+k)*g-l+k";
     cout << "Infix: " << exp << endl;;
     cout << "Postfix: " << infixToPostfix(exp) << endl;
     cout << "Prefix: " << infixToPrefix(exp) << endl; 
