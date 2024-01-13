@@ -6,6 +6,10 @@ bool isOperator(char c) {
     return (!isalpha(c) && !isdigit(c));
 }
 
+bool isOperand(char c) {
+    return (isalpha(c));
+}
+
 int prec(char c) {
     if (c == '-' or c == '+') {
         return 1;
@@ -70,6 +74,49 @@ string infixToPrefix(string& infix) {
     }
     string prefix = infixToPostfix(infix);
     reverse(prefix.begin(), prefix.end()); 
+
+    return prefix;
+}
+
+string postfixToInfix(string& postfix) {
+    stack<string> myStack;
+
+    for (int i = 0; postfix[i] != '\0'; i++) {
+        if (isOperand(postfix[i])) {
+            string op(1, postfix[i]);
+            myStack.push(op);
+        } else {
+            string op1 = myStack.top();
+            myStack.pop();
+            string op2 = myStack.top();
+            myStack.pop();
+            myStack.push("(" + op2 + postfix[i] + op1 + ')');
+        }
+    }
+    
+    return myStack.top();
+}
+
+string postfixToPrefix(string& postfix) {
+    stack<string> myStack;
+
+    for (int i = 0; i < postfix.length(); i++) {
+        if (isOperator(postfix[i])) {
+            string op1 = myStack.top();
+            myStack.pop();
+            string op2 = myStack.top();
+            myStack.pop();
+            string temp = postfix[i] + op2 + op1;
+            myStack.push(temp);
+        } else {
+            myStack.push(string(1, postfix[i]));
+        }
+    }
+    string prefix = "";
+    while (!myStack.empty()) {
+        prefix += myStack.top();
+        myStack.pop();
+    }
 
     return prefix;
 }
