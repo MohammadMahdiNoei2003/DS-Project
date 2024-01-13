@@ -120,3 +120,41 @@ string postfixToPrefix(string& postfix) {
 
     return prefix;
 }
+
+string prefixToInfix(string& prefix) {
+    stack<string> myStack;
+    
+    for (int i = prefix.length() - 1; i >= 0; i--) {
+        if (isOperator(prefix[i])) {
+            string op1 = myStack.top();
+            myStack.pop();
+            string op2 = myStack.top();
+            myStack.pop();
+            string temp = "(" + op1 + prefix[i] + op2 + ")";
+            myStack.push(temp);
+        } else {
+            myStack.push(string(1, prefix[i]));
+        }
+    }
+
+    return myStack.top();
+}
+
+string prefixToPostfix(string& prefix) {
+    stack<string> myStack;
+
+    for (int i = prefix.length() - 1; i >= 0; i--) {
+        if (isOperator(prefix[i])) {
+            string op1 = myStack.top();
+            myStack.pop();
+            string op2 = myStack.top();
+            myStack.pop();
+            string temp = op1 + op2 + prefix[i];
+            myStack.push(temp);
+        } else {
+            myStack.push(string(1, prefix[i]));
+        }
+    }
+
+    return myStack.top();
+}
