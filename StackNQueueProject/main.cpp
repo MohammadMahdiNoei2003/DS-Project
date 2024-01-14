@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    string exp = "*-A/BC-/AKL";
+    string exp = "";
     /*
     This component is for converting from infix 
     */
@@ -22,9 +22,9 @@ int main() {
     /*
     This component is for converting from prefix 
     */
-    cout << "Prefix: " << exp << endl;
-    cout << "Infix: " << prefixToInfix(exp) << endl;
-    cout << "Postfix: " << prefixToPostfix(exp) << endl;
+    // cout << "Prefix: " << exp << endl;
+    // cout << "Infix: " << prefixToInfix(exp) << endl;
+    // cout << "Postfix: " << prefixToPostfix(exp) << endl;
 
     return 0;
 }
